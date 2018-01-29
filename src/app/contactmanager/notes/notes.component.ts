@@ -9,7 +9,6 @@ import { MatTableDataSource, MatPaginator } from '@angular/material';
 })
 export class NotesComponent implements OnInit, AfterViewInit {
 
-
   @Input() notes: Note[];
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -26,4 +25,11 @@ export class NotesComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator
   }
+  
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
+    this.dataSource.filter = filterValue;
+  }
+  
 }
