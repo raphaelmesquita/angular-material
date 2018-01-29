@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 
 import { MatButtonModule, MatCheckboxModule, MatIconModule } from "@angular/material";
 
-let matModules = [
+const matModules = [
   MatButtonModule,
   MatCheckboxModule,
   MatIconModule
