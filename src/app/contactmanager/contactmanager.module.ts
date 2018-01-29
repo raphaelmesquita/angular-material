@@ -14,6 +14,7 @@ import { SidenavComponent } from './components/sidenav/sidenav.component';
 
 import { UserService } from './services/user.service';
 import { NotesComponent } from './notes/notes.component';
+import { NewContactDialogComponent } from './components/new-contact-dialog/new-contact-dialog.component';
 
 @NgModule({
   imports: [
@@ -29,10 +30,14 @@ import { NotesComponent } from './notes/notes.component';
     ToolbarComponent,
     MainContentComponent,
     SidenavComponent,
-    NotesComponent
+    NotesComponent,
+    NewContactDialogComponent
   ],
   providers: [
     UserService
+  ],
+  entryComponents: [
+    NewContactDialogComponent
   ]
 })
 export class ContactmanagerModule { }
