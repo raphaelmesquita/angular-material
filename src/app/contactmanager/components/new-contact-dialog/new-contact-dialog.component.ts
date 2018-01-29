@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material';
 import { User } from '../../models/user';
 import { FormControl, Validators } from '@angular/forms';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-new-contact-dialog',
@@ -17,7 +18,9 @@ export class NewContactDialogComponent implements OnInit {
 
   name = new FormControl('', [Validators.required])
 
-  constructor(private _dialogRef: MatDialogRef<NewContactDialogComponent>) { }
+  constructor(
+    private _dialogRef: MatDialogRef<NewContactDialogComponent>,
+    private userService: UserService) { }
 
   ngOnInit() {
     this.user = new User();
@@ -28,7 +31,9 @@ export class NewContactDialogComponent implements OnInit {
   }
 
   save() {
-    this._dialogRef.close(this.user);
+    this.userService.addUser(this.user).then(user => {
+      this._dialogRef.close(user);
+    });
   }
 
   dismiss() {
