@@ -13,6 +13,7 @@ import { MainContentComponent } from './components/main-content/main-content.com
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 
 import { UserService } from './services/user.service';
+import { NotesComponent } from './notes/notes.component';
 
 @NgModule({
   imports: [
@@ -27,7 +28,8 @@ import { UserService } from './services/user.service';
     ContactmanagerAppComponent,
     ToolbarComponent,
     MainContentComponent,
-    SidenavComponent
+    SidenavComponent,
+    NotesComponent
   ],
   providers: [
     UserService
