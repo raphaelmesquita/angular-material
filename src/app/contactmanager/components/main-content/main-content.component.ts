@@ -22,13 +22,16 @@ export class MainContentComponent implements OnInit {
     this._route
       .params
       .switchMap(params => {
-        const id = params['id'];
+        let id = params['id'];
+        if (!id) id = 1;
+        this.user = null;
+
         return this._service.users$
           .filter(users => users.length > 0)
           .map(_ => this._service.userById(id));
       })
       .subscribe(user => {
-        this.user = user;
+        setTimeout(() => { this.user = user; }, 500);
       });
   }
 

@@ -1,8 +1,9 @@
-import { Component, OnInit, NgZone } from '@angular/core';
+import { Component, OnInit, NgZone, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { User } from '../../models/user';
 import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
+import { MatSidenav } from '@angular/material';
 
 const SMALL_WIDTH_BREAKPOINT = 720;
 
@@ -12,11 +13,13 @@ const SMALL_WIDTH_BREAKPOINT = 720;
   styleUrls: ['./sidenav.component.scss']
 })
 export class SidenavComponent implements OnInit {
+  
+  @ViewChild(MatSidenav) sidenav: MatSidenav
+  
+  users$: Observable<User[]>;
 
   private mediaMatcher: MediaQueryList =
     matchMedia(`(max-width: ${SMALL_WIDTH_BREAKPOINT}px)`);
-
-  users$: Observable<User[]>;
 
   constructor(
     zone: NgZone,
@@ -30,9 +33,11 @@ export class SidenavComponent implements OnInit {
   ngOnInit() {
     this.users$ = this._userService.users$;
     this._userService.loadAll();
-    this.users$.subscribe(data => {
-      if (data.length > 0) this._router.navigate(["/contactmanager", data[0].id]);
-    })
+    this._router.events.subscribe(() => {
+      if (this.isScreenSmall()) {
+        this.sidenav.close();
+      }
+    });
   }
 
   isScreenSmall(): boolean {
