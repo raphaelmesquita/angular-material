@@ -4,13 +4,12 @@
     <mat-toolbar color="primary">
       Contacts
     </mat-toolbar>
-    <mat-list>
-      <mat-list-item>Item 1</mat-list-item>
-      <mat-list-item>Item 2</mat-list-item>
-      <mat-list-item>Item 3</mat-list-item>
-    </mat-list>
+    <mat-nav-list>
+      <mat-list-item *ngFor="let user of users$ | async">
+        <a matLine href="#">{{ user.name }}</a>
+      </mat-list-item>
+    </mat-nav-list>
   </mat-sidenav>
-
   <mat-sidenav-content class="app-sidenav-content">
     <app-toolbar (toggleSideNav)="sidenav.toggle()"></app-toolbar>
     <div class="wrapper">
