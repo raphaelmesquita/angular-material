@@ -2,6 +2,7 @@ import { Component, OnInit, NgZone } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { User } from '../../models/user';
 import { UserService } from '../../services/user.service';
+import { Router } from '@angular/router';
 
 const SMALL_WIDTH_BREAKPOINT = 720;
 
@@ -17,14 +18,21 @@ export class SidenavComponent implements OnInit {
 
   users$: Observable<User[]>;
 
-  constructor(zone: NgZone, private _userService: UserService) {
+  constructor(
+    zone: NgZone,
+    private _userService: UserService,
+    private _router: Router) {
+
     this.mediaMatcher.addListener(mql =>
       zone.run(() => this.mediaMatcher = mql));
   }
 
   ngOnInit() {
     this.users$ = this._userService.users$;
-    this._userService.loadAll();    
+    this._userService.loadAll();
+    this.users$.subscribe(data => {
+      if (data.length > 0) this._router.navigate(["/contactmanager", data[0].id]);
+    })
   }
 
   isScreenSmall(): boolean {
