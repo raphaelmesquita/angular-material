@@ -19,6 +19,7 @@ export class SidenavComponent implements OnInit {
   users$: Observable<User[]>;
 
   isDarkTheme: boolean;
+  dir: string = "ltr";
 
   private mediaMatcher: MediaQueryList =
     matchMedia(`(max-width: ${SMALL_WIDTH_BREAKPOINT}px)`);
@@ -48,5 +49,9 @@ export class SidenavComponent implements OnInit {
 
   toggleTheme() {
     this.isDarkTheme = !this.isDarkTheme
+  }
+
+  toggleDir() {
+    this.dir = this.dir == "ltr" ? "rtl" : "ltr";
   }
 }
