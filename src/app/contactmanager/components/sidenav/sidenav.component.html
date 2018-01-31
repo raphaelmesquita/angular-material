@@ -1,4 +1,4 @@
-<mat-sidenav-container class="app-sidenav-container">
+<mat-sidenav-container [class.dark-theme]="isDarkTheme" class="app-sidenav-container">
   <mat-sidenav #sidenav [opened]="!isScreenSmall()" [mode]="isScreenSmall() ? 'over' : 'side'"
     class="app-sidenav mat-elevation-z10">
     <mat-toolbar color="primary">
@@ -6,14 +6,14 @@
     </mat-toolbar>
     <mat-nav-list>
       <mat-list-item *ngFor="let user of users$ | async">
-        <a matLine [routerLink]="['/contactmanager', user.id]"> 
+        <a matLine [routerLink]="['/contactmanager', user.id]">
           <mat-icon [svgIcon]="user.avatar"></mat-icon> {{ user.name }}
         </a>
       </mat-list-item>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content class="app-sidenav-content">
-    <app-toolbar (toggleSideNav)="sidenav.toggle()"></app-toolbar>
+    <app-toolbar (toggleSideNav)="sidenav.toggle()" (toggleTheme)="toggleTheme()"></app-toolbar>
     <div class="wrapper">
       <router-outlet></router-outlet>
     </div>

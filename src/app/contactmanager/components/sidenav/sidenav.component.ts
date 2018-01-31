@@ -18,6 +18,8 @@ export class SidenavComponent implements OnInit {
   
   users$: Observable<User[]>;
 
+  isDarkTheme: boolean;
+
   private mediaMatcher: MediaQueryList =
     matchMedia(`(max-width: ${SMALL_WIDTH_BREAKPOINT}px)`);
 
@@ -42,5 +44,9 @@ export class SidenavComponent implements OnInit {
 
   isScreenSmall(): boolean {
     return this.mediaMatcher.matches;
+  }
+
+  toggleTheme() {
+    this.isDarkTheme = !this.isDarkTheme
   }
 }

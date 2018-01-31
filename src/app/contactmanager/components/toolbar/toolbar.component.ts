@@ -13,7 +13,8 @@ import { User } from '../../models/user';
 export class ToolbarComponent implements OnInit {
 
   @Output() toggleSideNav = new EventEmitter();
-
+  @Output() toggleTheme = new EventEmitter();
+  
   constructor(
     private _dialog: MatDialog,
     private _snackBar: MatSnackBar,
